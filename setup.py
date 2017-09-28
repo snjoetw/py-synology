@@ -2,10 +2,10 @@ from distutils.core import setup
 
 setup(
     name='py-synology',
-    version='0.1',
-    packages=[''],
+    version='0.2',
+    packages=['synology'],
     url='https://github.com/snjoetw/py-synology',
-    license='MIT License',
+    license='MIT',
     author='snjoetw',
     author_email='snjoetw@gmail.com',
     description='Python API for Synology Surveillance Station',
