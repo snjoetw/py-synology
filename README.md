@@ -43,3 +43,29 @@ surveillance.get_camera_image(camera_id)
 
 # Updates all cameras/motion settings and cahce them
 surveillance.update()
+```
+
+
+## Data Model
+
+### Camera
+
+A representation of a Synology SurveillanceStation camera
+
+| Property         | Description                    |
+| ---------------- | ------------------------------ |
+| camera_id        | id of the camera               |
+| name             | name of the camera             |
+| video_stream_url | video stream url of the camera |
+| is_enabled       | true if camera is enabled      |
+| is_recording     | true if camera is recording    |
+
+
+### MotionSetting
+
+A representation of a Synology SurveillanceStation motion setting
+
+| Property         | Description                    |
+| ---------------- | ------------------------------ |
+| camera_id        | id of the camera               |
+| is_enabled       | true if motion detection is enabled |
