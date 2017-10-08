@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='py-synology',
-    version='0.1.2',
+    version='0.1.3',
     packages=['synology'],
     url='https://github.com/snjoetw/py-synology',
     license='MIT',
