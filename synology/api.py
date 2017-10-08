@@ -1,4 +1,3 @@
-import json
 import urllib
 
 import requests
@@ -186,7 +185,7 @@ class Api:
 
     def _get_json(self, url, payload):
         response = self._get(url, payload)
-        content = json.loads(response.content)
+        content = response.json()
 
         if 'success' not in content or content['success'] is False:
             raise ValueError('Invalid or failed response', content)
