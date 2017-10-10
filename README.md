@@ -1,5 +1,5 @@
 # py-synology
-Python API for Synology Surveillance Station
+Python API for Synology Surveillance Station.  This is used in [Home Assistant](https://home-assistant.io) but should be generic enough that can be used elsewhere.
 
 
 ## Install
@@ -69,3 +69,8 @@ A representation of a Synology SurveillanceStation motion setting
 | ---------------- | ------------------------------ |
 | camera_id        | id of the camera               |
 | is_enabled       | true if motion detection is enabled |
+
+
+## Reference
+
+[Surveillance Station API v2.7](https://global.download.synology.com/download/Document/DeveloperGuide/Surveillance_Station_Web_API_v2.7.pdf)
