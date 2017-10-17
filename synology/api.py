@@ -77,6 +77,7 @@ class Api:
             'version': api['version'],
             'account': self._username,
             'passwd': self._password,
+            'session': 'SurveillanceStation',
             'format': 'sid',
         }, **kwargs)
         response = self._get_json(api['url'], payload)
