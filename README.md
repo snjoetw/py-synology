@@ -18,7 +18,7 @@ api_url = 'https://localhost:5001'
 username = 'USERNAME'
 password = 'PASSWORD'
 # Verify SSL certificate or not, default true 
-verify_ssl = false
+verify_ssl = False
 # Timeout in seconds, default 10
 timeout = 10
 
