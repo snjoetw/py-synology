@@ -1,4 +1,7 @@
-from synology.api import Api, MOTION_DETECTION_SOURCE_BY_SURVEILLANCE, MOTION_DETECTION_SOURCE_DISABLED
+"""Python Synology SurveillanceStation wrapper."""
+from synology.api import (
+    Api, MOTION_DETECTION_SOURCE_BY_SURVEILLANCE,
+    MOTION_DETECTION_SOURCE_DISABLED)
 
 
 class SurveillanceStation:

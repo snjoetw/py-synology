@@ -1,3 +1,4 @@
+"""Python Synology SurveillanceStation API wrapper."""
 import urllib
 
 import requests
