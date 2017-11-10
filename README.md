@@ -1,4 +1,4 @@
-# py-synology
+# py-synology [![Build Status](https://travis-ci.org/snjoetw/py-synology.svg?branch=master)](https://travis-ci.org/snjoetw/py-synology)
 Python API for Synology Surveillance Station.  This is used in [Home Assistant](https://home-assistant.io) but should be generic enough that can be used elsewhere.
 
 
