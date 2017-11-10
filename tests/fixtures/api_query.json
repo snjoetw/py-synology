@@ -1,0 +1,27 @@
+{
+  "data": {
+    "SYNO.API.Auth": {
+      "maxVersion": 6,
+      "minVersion": 1,
+      "path": "auth.cgi"
+    },
+    "SYNO.SurveillanceStation.Camera": {
+      "maxVersion": 9,
+      "minVersion": 1,
+      "path": "entry.cgi",
+      "requestFormat": "JSON"
+    },
+    "SYNO.SurveillanceStation.Camera.Event": {
+      "maxVersion": 1,
+      "minVersion": 1,
+      "path": "entry.cgi",
+      "requestFormat": "JSON"
+    },
+    "SYNO.SurveillanceStation.VideoStream": {
+      "maxVersion": 1,
+      "minVersion": 1,
+      "path": "SurveillanceStation/videoStreaming.cgi"
+    }
+  },
+  "success": true
+}
