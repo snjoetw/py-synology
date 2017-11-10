@@ -35,11 +35,6 @@ def _setup_responses(mock):
         CAMERA_URL,
         text=load_fixture("api_camera.json"))
 
-    mock.register_uri(
-        "GET",
-        CAMERA_URL,
-        text=load_fixture("api_camera_event.json"))
-
 
 class TestApi(unittest.TestCase):
     @requests_mock.Mocker()
