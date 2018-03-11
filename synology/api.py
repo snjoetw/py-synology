@@ -268,4 +268,6 @@ class MotionSetting:
 
 
 class SessionExpiredException(Exception):
+    """An error indicating session expired."""
+
     pass
