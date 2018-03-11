@@ -184,10 +184,8 @@ class Api:
         response = requests.get(url, payload, timeout=self._timeout,
                                 verify=self._verify_ssl)
 
-        if response.status_code == 200:
-            return response
-        else:
             response.raise_for_status()
+        return response
 
     def _get_json_with_retry(self, url, payload):
         try:
