@@ -1,6 +1,8 @@
 """Python Synology SurveillanceStation API wrapper."""
-import requests
 import urllib
+
+import requests
+
 
 ERROR_CODE_SESSION_EXPIRED = 105
 
