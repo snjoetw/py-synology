@@ -3,6 +3,9 @@ import urllib
 
 import requests
 
+
+ERROR_CODE_SESSION_EXPIRED = 105
+
 BASE_API_INFO = {
     'auth': {
         'name': 'SYNO.API.Auth',
@@ -63,7 +66,8 @@ class Api:
             'version': '1',
             'query': ','.join(API_NAMES),
         }, **kwargs)
-        response = self._get_json(self._base_url + 'query.cgi', payload)
+        response = self._get_json_with_retry(self._base_url + 'query.cgi',
+                                             payload)
 
         self._api_info = BASE_API_INFO
         for api in self._api_info.values():
@@ -81,7 +85,7 @@ class Api:
             'session': 'SurveillanceStation',
             'format': 'sid',
         }, **kwargs)
-        response = self._get_json(api['url'], payload)
+        response = self._get_json_with_retry(api['url'], payload)
 
         self._sid = response['data']['sid']
 
@@ -94,7 +98,7 @@ class Api:
             'method': 'List',
             'version': api['version'],
         }, **kwargs)
-        response = self._get_json(api['url'], payload)
+        response = self._get_json_with_retry(api['url'], payload)
 
         cameras = []
 
@@ -113,7 +117,7 @@ class Api:
             'version': api['version'],
             'cameraIds': ', '.join(str(id) for id in camera_ids),
         }, **kwargs)
-        response = self._get_json(api['url'], payload)
+        response = self._get_json_with_retry(api['url'], payload)
 
         cameras = []
 
@@ -146,7 +150,7 @@ class Api:
             'version': api['version'],
             'camId': camera_id,
         }, **kwargs)
-        response = self._get_json(api['url'], payload)
+        response = self._get_json_with_retry(api['url'], payload)
 
         return MotionSetting(camera_id, response['data']['MDParam'])
 
@@ -160,7 +164,7 @@ class Api:
             'version': api['version'],
             'camId': camera_id,
         }, **kwargs)
-        response = self._get_json(api['url'], payload)
+        response = self._get_json_with_retry(api['url'], payload)
 
         return response['data']['camId']
 
@@ -180,16 +184,26 @@ class Api:
         response = requests.get(url, payload, timeout=self._timeout,
                                 verify=self._verify_ssl)
 
-        if response.status_code == 200:
-            return response
-        else:
-            response.raise_for_status()
+        response.raise_for_status()
+        return response
+
+    def _get_json_with_retry(self, url, payload):
+        try:
+            return self._get_json(url, payload)
+        except SessionExpiredException:
+            self._initialize_api_sid()
+            return self._get_json(url, payload)
 
     def _get_json(self, url, payload):
         response = self._get(url, payload)
         content = response.json()
 
         if 'success' not in content or content['success'] is False:
+            error_code = content.get('error', {}).get('code')
+
+            if ERROR_CODE_SESSION_EXPIRED == error_code:
+                raise SessionExpiredException('Session expired')
+
             raise ValueError('Invalid or failed response', content)
 
         return content
@@ -249,3 +263,9 @@ class MotionSetting:
     def is_enabled(self):
         """Return true if motion detection is enabled."""
         return MOTION_DETECTION_SOURCE_DISABLED != self._source
+
+
+class SessionExpiredException(Exception):
+    """An error indicating session expired."""
+
+    pass
