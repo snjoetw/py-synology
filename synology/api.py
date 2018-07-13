@@ -23,6 +23,10 @@ BASE_API_INFO = {
         'name': 'SYNO.SurveillanceStation.VideoStream',
         'version': 1
     },
+    'home_mode': {
+        'name': 'SYNO.SurveillanceStation.HomeMode',
+        'version': 1
+    },
 }
 
 API_NAMES = [api['name'] for api in BASE_API_INFO.values()]
@@ -42,6 +46,8 @@ MOTION_DETECTION_SOURCE_DISABLED = -1
 MOTION_DETECTION_SOURCE_BY_CAMERA = 0
 MOTION_DETECTION_SOURCE_BY_SURVEILLANCE = 1
 
+HOME_MODE_ON = "true"
+HOME_MODE_OFF = "false"
 
 class Api:
     """An implementation of a Synology SurveillanceStation API."""
@@ -88,6 +94,41 @@ class Api:
         response = self._get_json_with_retry(api['url'], payload)
 
         self._sid = response['data']['sid']
+
+    def home_mode_set_state(self, state, **kwargs):
+        """Set the state of Home Mode"""
+
+        # It appears that surveillance station needs lowercase text true/false for the on switch
+        if state != HOME_MODE_ON and state != HOME_MODE_OFF:
+            raise ValueError('Invalid home mode state')
+
+        api = self._api_info['home_mode']
+        payload = dict({
+            'api': api['name'],
+            'method': 'Switch',
+            'version': api['version'],
+            'on': state,
+            '_sid': self._sid,
+        }, **kwargs)
+        response = self._get_json_with_retry(api['url'], payload)
+
+        if response['success']:
+            return True
+
+        return False
+
+    def home_mode_status(self, **kwargs):
+        """Returns the status of Home Mode"""
+        api = self._api_info['home_mode']
+        payload = dict({
+            'api': api['name'],
+            'method': 'GetInfo',
+            'version': api['version'],
+            '_sid': self._sid
+        }, **kwargs)
+        response = self._get_json_with_retry(api['url'], payload)
+
+        return response['data']['on']
 
     def camera_list(self, **kwargs):
         """Return a list of cameras."""
