@@ -49,6 +49,7 @@ MOTION_DETECTION_SOURCE_BY_SURVEILLANCE = 1
 HOME_MODE_ON = "true"
 HOME_MODE_OFF = "false"
 
+
 class Api:
     """An implementation of a Synology SurveillanceStation API."""
 
@@ -98,7 +99,8 @@ class Api:
     def home_mode_set_state(self, state, **kwargs):
         """Set the state of Home Mode"""
 
-        # It appears that surveillance station needs lowercase text true/false for the on switch
+        # It appears that surveillance station needs lowercase text
+        # true/false for the on switch
         if state != HOME_MODE_ON and state != HOME_MODE_OFF:
             raise ValueError('Invalid home mode state')
 
