@@ -43,6 +43,13 @@ surveillance.get_camera_image(camera_id)
 
 # Updates all cameras/motion settings and cahce them
 surveillance.update()
+
+# Gets Home Mode status
+home_mode_status =  surveillance.get_home_mode_status()
+
+# Sets home mode - true is on, false is off
+surveillance.set_home_mode(True)
+
 ```
 
 

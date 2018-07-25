@@ -21,6 +21,12 @@
       "maxVersion": 1,
       "minVersion": 1,
       "path": "SurveillanceStation/videoStreaming.cgi"
+    },
+    "SYNO.SurveillanceStation.HomeMode": {
+      "maxVersion": 1,
+      "minVersion": 1,
+      "path": "entry.cgi",
+      "requestFormat": "JSON"
     }
   },
   "success": true

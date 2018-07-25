@@ -1,7 +1,8 @@
 """Python Synology SurveillanceStation wrapper."""
 from synology.api import (
     Api, MOTION_DETECTION_SOURCE_BY_SURVEILLANCE,
-    MOTION_DETECTION_SOURCE_DISABLED)
+    MOTION_DETECTION_SOURCE_DISABLED,
+    HOME_MODE_ON, HOME_MODE_OFF)
 
 
 class SurveillanceStation:
@@ -55,3 +56,14 @@ class SurveillanceStation:
         self._api.camera_event_md_param_save(
             camera_id,
             source=MOTION_DETECTION_SOURCE_DISABLED)
+
+    def set_home_mode(self, state):
+        """Set the state of Home Mode"""
+        state_parameter = HOME_MODE_OFF
+        if state:
+            state_parameter = HOME_MODE_ON
+        return self._api.home_mode_set_state(state_parameter)
+
+    def get_home_mode_status(self):
+        """Get the state of Home Mode"""
+        return self._api.home_mode_status()
