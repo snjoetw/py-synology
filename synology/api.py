@@ -101,7 +101,7 @@ class Api:
 
         # It appears that surveillance station needs lowercase text
         # true/false for the on switch
-        if state != HOME_MODE_ON and state != HOME_MODE_OFF:
+        if state not in (HOME_MODE_ON, HOME_MODE_OFF):
             raise ValueError('Invalid home mode state')
 
         api = self._api_info['home_mode']
