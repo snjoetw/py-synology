@@ -183,6 +183,35 @@ class Api:
 
         return response.content
 
+    def camera_disable(self, camera_id, **kwargs):
+        """Disable camera."""
+        api = self._api_info['camera']
+        payload = dict({
+            '_sid': self._sid,
+            'api': api['name'],
+            'method': 'Disable',
+            'version': api['version'],
+            'cameraId': camera_id,
+        }, **kwargs)
+        response = self._get(api['url'], payload)
+
+        return response.content
+    
+    def camera_enable(self, camera_id, **kwargs):
+        """Enable camera."""
+        api = self._api_info['camera']
+        payload = dict({
+            '_sid': self._sid,
+            'api': api['name'],
+            'method': 'Enable',
+            'version': api['version'],
+            'cameraId': camera_id,
+        }, **kwargs)
+        response = self._get(api['url'], payload)
+
+        return response.content
+
+
     def camera_event_motion_enum(self, camera_id, **kwargs):
         """Return motion settings matching camera_id."""
         api = self._api_info['camera_event']
