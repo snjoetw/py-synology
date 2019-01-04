@@ -198,7 +198,7 @@ class Api:
         response = self._get(api['url'], payload)
 
         return response['success']
-    
+
     def camera_enable(self, camera_id, **kwargs):
         """Enable a camera"""
         api = self._api_info['camera']
