@@ -1,5 +1,5 @@
 """Python Synology SurveillanceStation wrapper."""
-from api import (
+from synology.api import (
     Api, MOTION_DETECTION_SOURCE_BY_SURVEILLANCE,
     MOTION_DETECTION_SOURCE_DISABLED,
     HOME_MODE_ON, HOME_MODE_OFF)
