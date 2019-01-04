@@ -213,7 +213,6 @@ class Api:
 
         return response['success']
 
-
     def camera_event_motion_enum(self, camera_id, **kwargs):
         """Return motion settings matching camera_id."""
         api = self._api_info['camera_event']
