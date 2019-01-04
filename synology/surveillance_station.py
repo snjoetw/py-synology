@@ -1,5 +1,5 @@
 """Python Synology SurveillanceStation wrapper."""
-from synology.api import (
+from api import (
     Api, MOTION_DETECTION_SOURCE_BY_SURVEILLANCE,
     MOTION_DETECTION_SOURCE_DISABLED,
     HOME_MODE_ON, HOME_MODE_OFF)
@@ -47,7 +47,7 @@ class SurveillanceStation:
 
     def enable_camera(self, camera_id):
         """Enable camera."""
-        return self._api.camera_disable(camera_id)
+        return self._api.camera_enable(camera_id)
 
     def get_motion_setting(self, camera_id):
         """Return motion setting matching camera_id."""

@@ -190,26 +190,28 @@ class Api:
             '_sid': self._sid,
             'api': api['name'],
             'method': 'Disable',
-            'version': api['version'],
-            'cameraId': camera_id,
+            'version': 9,
+            'idList': camera_id,
         }, **kwargs)
+        print(api['url'])
+        print(payload)
         response = self._get(api['url'], payload)
 
-        return response.content
+        return response['success']
     
     def camera_enable(self, camera_id, **kwargs):
-        """Enable camera."""
+        """Enable a camera"""
         api = self._api_info['camera']
         payload = dict({
             '_sid': self._sid,
             'api': api['name'],
             'method': 'Enable',
-            'version': api['version'],
-            'cameraId': camera_id,
+            'version': 9,
+            'idList': camera_id,
         }, **kwargs)
-        response = self._get(api['url'], payload)
+        response = self._get_json_with_retry(api['url'], payload)
 
-        return response.content
+        return response['success']
 
 
     def camera_event_motion_enum(self, camera_id, **kwargs):
