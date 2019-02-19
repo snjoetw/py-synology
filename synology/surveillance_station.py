@@ -41,6 +41,14 @@ class SurveillanceStation:
         """Return bytes of camera image for camera matching camera_id."""
         return self._api.camera_snapshot(camera_id)
 
+    def disable_camera(self, camera_id):
+        """Disable camera(s) - multiple ID or single ex 1 or 1,2,3."""
+        return self._api.camera_disable(camera_id)
+
+    def enable_camera(self, camera_id):
+        """Enable camera(s) - multiple ID or single ex 1 or 1,2,3."""
+        return self._api.camera_enable(camera_id)
+
     def get_motion_setting(self, camera_id):
         """Return motion setting matching camera_id."""
         return self._motion_settings_by_id[camera_id]
