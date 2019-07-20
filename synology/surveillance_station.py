@@ -41,9 +41,9 @@ class SurveillanceStation:
         """Return bytes of camera image for camera matching camera_id."""
         return self._api.camera_snapshot(camera_id)
 
-    def capture_camera_image(self, camera_id):
+    def capture_camera_image(self, camera_id, save=True):
         """Capture a snapshot for camera matching camera_id."""
-        return self._api.take_camera_snapshot(camera_id)
+        return self._api.take_camera_snapshot(camera_id, save)
 
     def download_snapshot(self, snapshot_id, snapshot_size):
         """Download snapshot image binary for a givent snapshot_id."""
