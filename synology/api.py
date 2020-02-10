@@ -190,7 +190,7 @@ class Api:
 
         return response.content
 
-    def take_camera_snapshot(self, camera_id, blSave =True, **kwargs):
+    def take_camera_snapshot(self, camera_id, blSave=True, **kwargs):
         """Trigger a snapshot capture of camera image."""
         api = self._api_info['snapshot']
         payload = dict({
