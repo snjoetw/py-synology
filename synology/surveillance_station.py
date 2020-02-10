@@ -41,6 +41,15 @@ class SurveillanceStation:
         """Return bytes of camera image for camera matching camera_id."""
         return self._api.camera_snapshot(camera_id)
 
+    def capture_camera_image(self, camera_id, save=True):
+        """Capture a snapshot for camera matching camera_id."""
+        return self._api.take_camera_snapshot(camera_id, save)
+
+    def download_snapshot(self, snapshot_id, snapshot_size):
+        """Download snapshot image binary for a givent snapshot_id."""
+        return self._api.get_camera_snapshot(snapshot_id, snapshot_size)
+
+
     def disable_camera(self, camera_id):
         """Disable camera(s) - multiple ID or single ex 1 or 1,2,3."""
         return self._api.camera_disable(camera_id)

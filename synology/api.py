@@ -27,6 +27,10 @@ BASE_API_INFO = {
         'name': 'SYNO.SurveillanceStation.HomeMode',
         'version': 1
     },
+    'snapshot': {
+        'name': 'SYNO.SurveillanceStation.SnapShot',
+        'version': 1
+    },
 }
 
 API_NAMES = [api['name'] for api in BASE_API_INFO.values()]
@@ -48,6 +52,9 @@ MOTION_DETECTION_SOURCE_BY_SURVEILLANCE = 1
 
 HOME_MODE_ON = "true"
 HOME_MODE_OFF = "false"
+
+SNAPSHOT_SIZE_ICON = 1
+SNAPSHOT_SIZE_FULL = 2
 
 
 class Api:
@@ -178,6 +185,37 @@ class Api:
             'method': 'GetSnapshot',
             'version': api['version'],
             'cameraId': camera_id,
+        }, **kwargs)
+        response = self._get(api['url'], payload)
+
+        return response.content
+
+    def take_camera_snapshot(self, camera_id, blSave =True, **kwargs):
+        """Trigger a snapshot capture of camera image."""
+        api = self._api_info['snapshot']
+        payload = dict({
+            '_sid': self._sid,
+            'api': api['name'],
+            'method': 'TakeSnapshot',
+            'version': api['version'],
+            'camId': camera_id,
+            'blSave': int(blSave)
+        }, **kwargs)
+
+        response = self._get_json_with_retry(api['url'], payload)
+
+        return response
+
+    def get_camera_snapshot(self, snapshot_id, snapshot_size, **kwargs):
+        """Return bytes of camera image."""
+        api = self._api_info['snapshot']
+        payload = dict({
+            '_sid': self._sid,
+            'api': api['name'],
+            'method': 'LoadSnapshot',
+            'version': api['version'],
+            'id': snapshot_id,
+            'imgSize': snapshot_size
         }, **kwargs)
         response = self._get(api['url'], payload)
 
