@@ -190,7 +190,7 @@ class Api:
 
         return response.content
 
-    def take_camera_snapshot(self, camera_id, blSave=True, **kwargs):
+    def take_camera_snapshot(self, camera_id, save=True, **kwargs):
         """Trigger a snapshot capture of camera image."""
         api = self._api_info['snapshot']
         payload = dict({
@@ -199,7 +199,7 @@ class Api:
             'method': 'TakeSnapshot',
             'version': api['version'],
             'camId': camera_id,
-            'blSave': int(blSave)
+            'blSave': int(save)
         }, **kwargs)
 
         response = self._get_json_with_retry(api['url'], payload)
