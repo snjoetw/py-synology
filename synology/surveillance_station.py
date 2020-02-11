@@ -49,7 +49,6 @@ class SurveillanceStation:
         """Download snapshot image binary for a givent snapshot_id."""
         return self._api.get_camera_snapshot(snapshot_id, snapshot_size)
 
-
     def disable_camera(self, camera_id):
         """Disable camera(s) - multiple ID or single ex 1 or 1,2,3."""
         return self._api.camera_disable(camera_id)
